@@ -1,20 +1,20 @@
 // Sends a http request to the MQTT client and returns the values of the sensors
-async function getSensorValues() {
-  let url = 'http://localhost:3001';
+async function getSensorValues () {
+  const url = 'http://localhost:3001'
   try {
-    let res = await fetch(url);
-    return await res.json(); // Other option is .text()
+    const res = await fetch(url)
+    return await res.json() // Other option is .text()
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
 // Creates div-elements with inside the values of the sensor
-async function renderSensorValues() {
-  let payload = await getSensorValues();
-  let html = '';
+async function renderSensorValues () {
+  const payload = await getSensorValues()
+  let html = ''
   payload.forEach(sensor => {
-    let htmlSegment = `<div class="grid-item">
+    const htmlSegment = `<div class="grid-item">
                           <p>${sensor.heaterstatus}</p>
                         </div>
                         <div class="grid-item">
@@ -28,11 +28,11 @@ async function renderSensorValues() {
                         </div>
                         <div class="grid-item">
                           <p>${sensor.temp_outside}</p>
-                        </div>`;
+                        </div>`
 
-      html += htmlSegment;
-  });
+    html += htmlSegment
+  })
 
-  let container = document.querySelector('.grid-container');
-  container.innerHTML = html;
+  const container = document.querySelector('.grid-container')
+  container.innerHTML = html
 }
