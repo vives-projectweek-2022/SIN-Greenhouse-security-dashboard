@@ -13,6 +13,7 @@ function fillingProgressBar() {
   }
 }
 
-function hackMQTT() {
+// TODO: function that publishes wrong values to the MQTT broker
+function hackMQTTBroker() {
   console.log("Successful");
 }

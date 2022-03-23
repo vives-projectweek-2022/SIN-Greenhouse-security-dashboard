@@ -4,17 +4,9 @@ block content
   header
     i(class='fas fa-user-secret fa-3x fa-border')
     h1= title
-  div(class='grid-container')
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
-    div(class='grid-item') #{title}
+  div(class='grid-container', onchange='getSensorValues(); renderSensorValues()')
+    // div(class='grid-item') #{title}
   div(class='hack')
-    button(id='hack-button', onclick='fillingProgressBar(); hackMQTT();') Hack
+    button(id='hack-button', onclick='fillingProgressBar(); hackMQTTBroker();') Hack
     div(id='empty-bar')
       div(id='progress-bar')
