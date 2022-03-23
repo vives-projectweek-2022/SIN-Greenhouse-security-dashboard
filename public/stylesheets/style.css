@@ -61,9 +61,9 @@ header i {
 }
 
 #progress-bar {
-  height: 24px;
+  height: 50px;
   width: 0%;
-  color: white;
+  color: var(--darkmode-text-color);
   background-color: var(--secondary-color);
 }
 

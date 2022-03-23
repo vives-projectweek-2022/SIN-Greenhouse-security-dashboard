@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET values. */
 router.get('/', function(req, res, next) {
-  res.send('Hello World!')
+  res.send({
+    // temp: topic;
+  });
 });
 
 module.exports = router;

@@ -1,6 +1,5 @@
 // It is possible to secure this with SSL
 // http://www.steves-internet-guide.com/using-node-mqtt-client/
-// Momentarily to run: node ../network-server/public/javascripts/mqtt-client.js
 
 const mqtt = require('mqtt');
 const host = "mqtt://172.16.108.54:1883";
@@ -20,12 +19,11 @@ const client  = mqtt.connect(host, options);
 // Handles connection and subscribes to wished topics
 client.on("connect", () => {	
   console.log("Connected");
-  // client.subscribe("sensor", { qos: 0 });
-  client.subscribe('sensor', { qos: 0 }, function (err) {
+  client.subscribe("sensor", { qos: 0 }, function (err) {
     if (!err) {
-      client.publish('sensor', 'Hello mqtt')
+      client.publish("sensor", "Hello there");
     }
-  })
+  });
 });
 
 // Handles failed connection
