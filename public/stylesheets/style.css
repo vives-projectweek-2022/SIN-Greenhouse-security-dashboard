@@ -1,0 +1,75 @@
+:root {
+  --document-font-family: arial, Helvetica, sans-serif;
+  --darkmode-background-color: #333333;
+  --darkmode-text-color: lightgray;
+  --primary-color: black;
+  --secondary-color: darkred;
+}
+
+body {
+  margin: 0;
+  background-color: var(--darkmode-background-color);
+  font-family: var(--document-font-family);
+}
+
+header {
+  background-color: var(--primary-color);
+  color: var(--darkmode-text-color);
+  display: flex;
+}
+
+header h1 {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+header i {
+  padding-left: 4px;
+  padding-top: 4px;
+}
+
+.grid-container {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}
+
+.grid-item {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  box-shadow: 1px 1px;
+}
+
+.hack {
+  display: flex;
+  flex: 1;
+}
+
+#hack-button {
+  width: 50px;
+  height: 50px;
+  background-color: var(--secondary-color);
+  font-weight: bolder;
+  border-radius: 50%;
+}
+
+#progress-bar {
+  height: 24px;
+  width: 0%;
+  color: white;
+  background-color: var(--secondary-color);
+}
+
+#empty-bar {
+  color: var(--primary-color);
+  border: var(--primary-color) solid;
+  background-color: var(--darkmode-text-color);
+  min-width: 300px;
+}

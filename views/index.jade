@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  header
+    i(class='fas fa-user-secret fa-3x fa-border')
+    h1= title
+  div(class='grid-container')
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+    div(class='grid-item') #{title}
+  div(class='hack')
+    button(id='hack-button', onclick='fillingProgressBar(); hackMQTT();') Hack
+    div(id='empty-bar')
+      div(id='progress-bar')
