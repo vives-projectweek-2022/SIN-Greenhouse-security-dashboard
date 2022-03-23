@@ -1,6 +1,6 @@
 :root {
-  --document-font-family: arial, Helvetica, sans-serif;
-  --darkmode-background-color: #333333;
+  --document-font-family: arial, helvetica, sans-serif;
+  --darkmode-background-color: #333;
   --darkmode-text-color: lightgray;
   --primary-color: black;
   --secondary-color: darkred;

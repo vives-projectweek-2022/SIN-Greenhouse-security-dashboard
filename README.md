@@ -11,7 +11,7 @@ Then to start the mqtt client enter the command `node ../SIN-Greenhouse-security
 
 The best way to interact with this project is to open all folders except node_modules.
 
-To create a new page to request information from, you need to create a new Javascript file in the folder routes. Then add the necessary links in app.js.
+To create a new page to request information from, you need to create a new JavaScript file in the folder routes. Then add the necessary links in app.js.
 
 ## Working with jade
 
