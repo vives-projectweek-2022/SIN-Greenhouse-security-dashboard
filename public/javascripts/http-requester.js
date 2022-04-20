@@ -9,13 +9,13 @@ async function getSensorValues () {
   }
 }
 
-// Creates div-elements with inside the values of the sensor
-async function renderSensorValues () {
+// Creates div-elements with inside the values of the senso
+function renderSensorValues () {
   const payload = await getSensorValues()
   let html = ''
   payload.forEach(sensor => {
     const htmlSegment = `<div class="grid-item">
-                          <p>${sensor.heaterstatus}</p>
+                          <p>hallo</p>
                         </div>
                         <div class="grid-item">
                           <p>${sensor.ventilatorstatus}</p>
@@ -32,6 +32,7 @@ async function renderSensorValues () {
 
     html += htmlSegment
   })
+
 
   const container = document.querySelector('.grid-container')
   container.innerHTML = html

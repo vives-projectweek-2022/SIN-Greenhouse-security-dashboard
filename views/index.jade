@@ -6,7 +6,10 @@ block content
     h1= title
   div(class='grid-container', onchange='getSensorValues(); renderSensorValues()')
     // div(class='grid-item') #{title}
+  div 
+  .row
+    ul.col#tempInside= 'ddd '
   div(class='hack')
-    button(id='hack-button', onclick='fillingProgressBar(); hackMQTTBroker();') Hack
+    button(id='hack-button', onclick=' getSensorValues(); fillingProgressBar(); hackMQTTBroker(); ') Hack
     div(id='empty-bar')
       div(id='progress-bar')
