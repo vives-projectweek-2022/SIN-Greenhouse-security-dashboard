@@ -8,4 +8,10 @@ router.get('/', function (req, res, next) {
   })
 })
 
+router.post('/', function (req, res, next) {
+  data = req
+  const container = document.querySelector('.grid-container')
+  container.innerHTML = data
+})
+
 module.exports = router

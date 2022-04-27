@@ -137,9 +137,15 @@ var jsonObj = {
       }
 }
 
-  
+// POST the received payload
+const importDynamic = new Function('modulePath', 'return import(modulePath)')
 
-  fetch('http://localhost:3000', {
+const fetch = async (...args) => {
+  const module = await importDynamic('node-fetch')
+  return module.default(...args)
+}
+
+  fetch('http://localhost:3000/', {
     method: 'POST',
     body: JSON.stringify(jsonObj),
     headers: { 'Content-Type': 'application/json' }
