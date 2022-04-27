@@ -5,20 +5,9 @@
 
 
 const http = require('http')
-
 const hostname = '127.0.0.1'
 const port = 3001
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'text/plain')
-  res.end('Hello World')
-
-})
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`)
-})
 
 // MQTT client
 const mqtt = require('mqtt')
@@ -33,41 +22,15 @@ const options = {
   // password: ''
 }
 
+const server = http.createServer((req, res) => {
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/plain')
+  res.end('Hello World')
 
-// Establishes connection
-  let convertedValue = '';
-  const client = mqtt.connect(host, options)
-  var payload =  '0x01,0x00,0x01,0x42,0xdc,0x33,0x33' ;
-  
-  // Handles connection and subscribes to wished topics
-  client.on('connect', () => {
-    console.log('Connected')
-    var inputArray = payload.split(",");
-    for(var i=0;i<inputArray.length;i++) {
-      var intVal = parseInt(inputArray[i],parseInt(16));
-      if(Number.isNaN(intVal)) {
-          CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
-          return;
-      } else {
-          convertedValue += String.fromCharCode(intVal);
-      }
-  
-    client.subscribe('test', { qos: 0 }, function (err) {
-      if (!err) {
-        client.publish('test', convertedValue)
-      }
-  })
-}
-
-
-// Handles failed connection
-client.on('error', (error) => {
-  console.log('Connection error: ' + error)
-  client.end()
 })
 
-client.on('reconnect', () => {
-  console.log('Reconnecting...')
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`)
 })
 
 const HexToFloat32 = (str) => {
@@ -81,6 +44,49 @@ const HexToFloat32 = (str) => {
       return float32 * sign;
   } else return 0
 }
+
+
+// Establishes connection
+let convertedValue = '';
+const client = mqtt.connect(host, options)
+
+
+  // Handles connection and subscribes to wished topics
+client.on('connect', () => {
+  var payload =  '0x01,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00' ;
+  
+  console.log('connected')
+  var inputArray = payload.split(",");
+  for(var i=0;i<inputArray.length;i++) {
+    var intVal = parseInt(inputArray[i],parseInt(16));
+    if(Number.isNaN(intVal)) {
+        CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
+        return;
+    } 
+    else 
+    {
+      convertedValue += String.fromCharCode(intVal);
+      client.subscribe('payload', { qos: 0 }, function (err) {
+        if (!err) 
+        {
+          client.publish('payload', convertedValue)
+        }
+      })
+  }
+}
+
+console.log(convertedValue);
+
+// Handles failed connection
+client.on('error', (error) => {
+  console.log('Connection error: ' + error)
+  client.end()
+})
+
+client.on('reconnect', () => {
+  console.log('Reconnecting...')
+})
+
 
 // Handles incoming messages
 client.on('message', (topic, message, packet) => {
@@ -109,7 +115,7 @@ if (buffer[1] ===  1) {
 console.log(ventilatorStatus)
 
 console.log('Door status: ')
-if (buffer[1] ===  1) {
+if (buffer[2] ===  1) {
   doorStatus = true
 }
 console.log(doorStatus)
@@ -170,5 +176,6 @@ var jsonObj = {
 //     headers: { 'Content-Type': 'application/json' }
 //   }).then(res => res.json())
 //     .then(json => console.log(json));
+
 })
 })
