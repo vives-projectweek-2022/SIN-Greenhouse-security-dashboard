@@ -108,7 +108,8 @@ console.log('Binnen Temperatuur')
       convertedTempInside = HexToFloat32(tempInside).toFixed(3);
     }
   }
-  console.log(convertedTempInside)
+console.log(tempInside)
+console.log(convertedTempInside)
   
 //Temperatuur buiten
 console.log('Buiten Temperatuur')
@@ -122,6 +123,7 @@ console.log('Buiten Temperatuur')
       
     }
   }
+  console.log(tempOutside)
   console.log(convertedTempOutside)
   
   console.log('topic is ' + topic)
@@ -136,14 +138,5 @@ var jsonObj = {
             door: doorStatus
       }
 }
-
-  
-
-  fetch('http://localhost:3000', {
-    method: 'POST',
-    body: JSON.stringify(jsonObj),
-    headers: { 'Content-Type': 'application/json' }
-  }).then(res => res.json())
-    .then(json => console.log(json));
 
 })

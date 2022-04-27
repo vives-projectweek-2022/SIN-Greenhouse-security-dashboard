@@ -18,20 +18,24 @@ function renderSensorValues () {
                           <p>hallo</p>
                         </div>
                         <div class="grid-item">
-                          <p>${sensor.ventilatorstatus}</p>
+                          <p>${inside.convertedTempInside}</p>
                         </div>
                         <div class="grid-item">
-                          <p>${sensor.doorstatus}</p>
+                          <p>${outside.convertedTempOutside}</p>
                         </div>
                         <div class="grid-item">
-                          <p>${sensor.temp_inside}</p>
+                          <p>${heater.heaterStatus}</p>
                         </div>
                         <div class="grid-item">
-                          <p>${sensor.temp_outside}</p>
+                          <p>${ventilator.ventilatorStatus}</p>
+                        </div>
+                        <div class="grid-item">
+                          <p>${door.doorStatus}</p>
                         </div>`
 
     html += htmlSegment
   })
+
 
 
   const container = document.querySelector('.grid-container')
