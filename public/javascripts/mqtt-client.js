@@ -10,7 +10,9 @@ const hostname = '127.0.0.1'
 const port = 3001
 
 const server = http.createServer((req, res) => {
-  res.render('index');
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/plain')
+  res.end('Hello World')
 
 })
 
@@ -33,10 +35,6 @@ const options = {
 
 
 // Establishes connection
-
-function post () {
-  const hostname = '127.0.0.1'
-  const port = 3001
   let convertedValue = '';
   const client = mqtt.connect(host, options)
   var payload =  '0x01,0x00,0x01,0x42,0xdc,0x33,0x33' ;
@@ -54,13 +52,13 @@ function post () {
           convertedValue += String.fromCharCode(intVal);
       }
   
-    client.subscribe('payload', { qos: 0 }, function (err) {
+    client.subscribe('test', { qos: 0 }, function (err) {
       if (!err) {
-        client.publish('payload', convertedValue)
+        client.publish('test', convertedValue)
       }
   })
 }
-});
+
 
 // Handles failed connection
 client.on('error', (error) => {
@@ -173,4 +171,4 @@ var jsonObj = {
 //   }).then(res => res.json())
 //     .then(json => console.log(json));
 })
-}
+})
