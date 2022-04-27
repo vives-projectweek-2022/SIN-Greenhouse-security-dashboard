@@ -31,18 +31,36 @@ const options = {
   // password: ''
 }
 
-// Establishes connection
-const client = mqtt.connect(host, options)
 
-// Handles connection and subscribes to wished topics
-client.on('connect', () => {
-  console.log('Connected')
-  client.subscribe('payload', { qos: 0 }, function (err) {
-    if (!err) {
-      // client.publish('payload', [1,0,0,65,179,42,172,65,180,164,112,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
-    }
+// Establishes connection
+
+function post () {
+  const hostname = '127.0.0.1'
+  const port = 3001
+  let convertedValue = '';
+  const client = mqtt.connect(host, options)
+  var payload =  '0x01,0x00,0x01,0x42,0xdc,0x33,0x33' ;
+  
+  // Handles connection and subscribes to wished topics
+  client.on('connect', () => {
+    console.log('Connected')
+    var inputArray = payload.split(",");
+    for(var i=0;i<inputArray.length;i++) {
+      var intVal = parseInt(inputArray[i],parseInt(16));
+      if(Number.isNaN(intVal)) {
+          CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
+          return;
+      } else {
+          convertedValue += String.fromCharCode(intVal);
+      }
+  
+    client.subscribe('payload', { qos: 0 }, function (err) {
+      if (!err) {
+        client.publish('payload', convertedValue)
+      }
   })
-})
+}
+});
 
 // Handles failed connection
 client.on('error', (error) => {
@@ -72,13 +90,13 @@ client.on('message', (topic, message, packet) => {
   console.log('packet is ' + packet)
   //Temperatuur binnen
 
-  let tempInside = '';
-  let convertedTempInside = '';
-  let tempOutside = '';
-  let convertedTempOutside ='';
-  let heaterStatus = false;
-  let ventilatorStatus = false;
-  let doorStatus = false;
+let tempInside = '';
+let convertedTempInside = '';
+let tempOutside = '';
+let convertedTempOutside ='';
+let heaterStatus = false;
+let ventilatorStatus = false;
+let doorStatus = false;
 
 console.log('Heater status: ')
 if (buffer[0] ===  1) {
@@ -139,19 +157,20 @@ var jsonObj = {
       }
 }
 
-// POST the received payload
-const importDynamic = new Function('modulePath', 'return import(modulePath)')
 
-const fetch = async (...args) => {
-  const module = await importDynamic('node-fetch')
-  return module.default(...args)
-}
+// // POST the received payload
+// const importDynamic = new Function('modulePath', 'return import(modulePath)')
 
-  fetch('http://localhost:3000/', {
-    method: 'POST',
-    body: JSON.stringify(jsonObj),
-    headers: { 'Content-Type': 'application/json' }
-  }).then(res => res.json())
-    .then(json => console.log(json));
+// const fetch = async (...args) => {
+//   const module = await importDynamic('node-fetch')
+//   return module.default(...args)
+// }
 
+//   fetch('http://localhost:3000/', {
+//     method: 'POST',
+//     body: JSON.stringify(jsonObj),
+//     headers: { 'Content-Type': 'application/json' }
+//   }).then(res => res.json())
+//     .then(json => console.log(json));
 })
+}
