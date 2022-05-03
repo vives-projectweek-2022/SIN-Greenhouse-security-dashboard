@@ -1,6 +1,6 @@
 // Sends a http request to the MQTT client and returns the values of the sensors
 async function getSensorValues () {
-  const url = 'http://localhost:3000'
+  const url = 'http://localhost:3000/getData'
   try {
     const res = await fetch(url)
     return await res.json() // Other option is .text()
