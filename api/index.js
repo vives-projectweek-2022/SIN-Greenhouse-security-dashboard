@@ -136,14 +136,13 @@ client.on('message', (topic, message, packet) => {
       }
     }
   console.log(convertedTempOutside)
-  
-  
-  payload = {
-    inside: convertedTempInside,
-    outside: convertedTempOutside,
-    heater: heaterStatus,
-    ventilator: ventilatorStatus,
-    door: doorStatus
-  }
-  module.exports = {payload}
+
+      payload = {
+      inside: convertedTempInside,
+      outside: convertedTempOutside,
+      heater: heaterStatus,
+      ventilator: ventilatorStatus,
+      door: doorStatus
+    }
+    
 })
