@@ -86,11 +86,11 @@ const HexToFloat32 = (str) => {
 
 // Global variable for the received MQTT data
 var payload = {
-  "inside": '',
-  "outside": '',
-  "heater": false,
-  "ventilator": false,
-  "door": false
+  inside: '',
+  outside: '',
+  heater: false,
+  ventilator: false,
+  door: false
 }
 
 // Handles incoming messages
@@ -157,10 +157,11 @@ client.on('message', (topic, message, packet) => {
   
   
   payload = {
-    "inside": convertedTempInside,
-    "outside": convertedTempOutside,
-    "heater": heaterStatus,
-    "ventilator": ventilatorStatus,
-    "door": doorStatus
+    inside: convertedTempInside,
+    outside: convertedTempOutside,
+    heater: heaterStatus,
+    ventilator: ventilatorStatus,
+    door: doorStatus
   }
+  module.exports = {payload}
 })
