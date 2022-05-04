@@ -1,0 +1,19 @@
+{
+  "name": "sin-greenhouse-security-dashboard",
+  "version": "1.0.0",
+  "description": "To start the server enter the command `$env:DEBUG='network-server:*'; npm start`.\r More information at [Express Getting Started](https://expressjs.com/en/starter/installing.html)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard/issues"
+  },
+  "homepage": "https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard#readme"
+}

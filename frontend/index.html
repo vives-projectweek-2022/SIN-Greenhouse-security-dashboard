@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
   <link rel="shortcut icon" href="./img/greenhouse.ico" type="image/x-icon"/>
+  <script> src="../api/index.js"</script>
 </head>
 <body>
   <header><i class="fas fa-user-secret fa-3x fa-border"></i>
@@ -31,7 +32,7 @@
     </div> -->
   </div>
   <div class="hack">
-    <button id="hack-button" onclick="fillingProgressBar();">Hack</button>
+    <button id="hack-button" onclick="fillingProgressBar(); hackMQTTBroker();">Hack</button>
     <div id="empty-bar">
       <div id="progress-bar"></div>
     </div>

@@ -53,7 +53,7 @@ const client = mqtt.connect(host, options)
 
   // Handles connection and subscribes to wished topics
 client.on('connect', () => {
-  var payload =  '0x01,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00' ;
+  var payload =  '0x01,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
   
   console.log('connected')
   var inputArray = payload.split(",");
@@ -62,7 +62,7 @@ client.on('connect', () => {
     if(Number.isNaN(intVal)) {
         CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
         return;
-    } 
+    }
     else 
     {
       convertedValue += String.fromCharCode(intVal);
