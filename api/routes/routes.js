@@ -4,12 +4,12 @@ const router = express.Router()
 
 module.exports = router;
 
-//Get all Method
+// Get Method
 router.get('/getData', (req, res) => {
   res.send(payload)
 })
 
-//Post Method
+// Post Method
 // router.post('/post', (req, res) => {
 //     res.send('Post API')
 // })

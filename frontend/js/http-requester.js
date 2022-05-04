@@ -15,7 +15,7 @@ function renderSensorValues () {
   let html = ''
   payload.forEach(sensor => {
     const htmlSegment = `<div class="grid-item">
-                          <p>hallo</p>
+                          <p>${sensor.heaterstatus}</p>
                         </div>
                         <div class="grid-item">
                           <p>${sensor.ventilatorstatus}</p>
