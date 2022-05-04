@@ -24,8 +24,6 @@ function fillingProgressBar () {
 }
 
 
-
-
 btn1.addEventListener('click', hackMQTTBroker, true); // i am not IE friendly
 
 client = new Paho.MQTT.Client(ip, Number(port), id);
@@ -46,7 +44,7 @@ function onConnect() {
 function hackMQTTBroker() {
 
   var convertedValue = '';
-  var payload = '0x01,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
+  var payload = '0x00,0x00,0x01,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
   var inputArray = payload.split(",");
   for(var i=0;i<inputArray.length;i++) 
   {
