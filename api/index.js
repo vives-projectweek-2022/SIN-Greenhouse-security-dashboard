@@ -1,10 +1,17 @@
 // MQTT client
+const express = require('express');
 const mqtt = require('mqtt')
 const host = 'mqtt://172.16.240.99:1883' // Change ip address into the one of the mqtt broker
+const app = express();
 const options = {
   clean: true,
   connectTimeout: 4000
 }
+let payload = {};
+
+
+
+
 
 // Establishes connection to MQTT broker
 const client = mqtt.connect(host, options)
@@ -67,7 +74,7 @@ const HexToFloat32 = (str) => {
 }
 
 // Global variable for the received MQTT data
-var payload = {
+payload = {
   inside: '',
   outside: '',
   heater: false,
@@ -120,6 +127,7 @@ client.on('message', (topic, message, packet) => {
       else {
         tempInside += buffer[i].toString(16)
         convertedTempInside = HexToFloat32(tempInside).toFixed(3);
+        
       }
   }
   console.log(convertedTempInside)
@@ -137,12 +145,26 @@ client.on('message', (topic, message, packet) => {
     }
   console.log(convertedTempOutside)
 
-      payload = {
+    payload = {
       inside: convertedTempInside,
       outside: convertedTempOutside,
       heater: heaterStatus,
       ventilator: ventilatorStatus,
       door: doorStatus
-    }
+    };
+
+     
     
 })
+
+
+
+
+
+
+app.post('/Post/json', function requestHandler(req, res) {
+  res.status(200).send(payload)
+});
+
+app.listen(4000);
+console.log('App Server running at port 4000');
