@@ -53,7 +53,7 @@ function showData() {
         if (buffer[0] ===  1) {
             heaterStatus = true
         }
-        document.div.innerHTML = "<div>Heater status: " + heaterstatus + "</div>"
+        document.innerHTML = `<div>Heater status: " + ${heaterstatus} + "</div>`
         console.log(heaterStatus)
 
 
@@ -97,9 +97,9 @@ function showData() {
         console.log(convertedTempOutside)
         
 
-    }) 
+    })
 
-   
+  
   
     // console.log(convertedValue + ' was clicked'); 
     // var message = new Paho.MQTT.Message(convertedValue);
