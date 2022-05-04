@@ -69,6 +69,28 @@ var payload = {
   "ventilator": false,
   "door": false
 }
+client.on('connect', () => {
+  var payload =  '0x01,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
+  
+  console.log('connected')
+  var inputArray = payload.split(",");
+  for(var i=0;i<inputArray.length;i++) {
+    var intVal = parseInt(inputArray[i],parseInt(16));
+    if(Number.isNaN(intVal)) {
+        CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
+        return;
+    }
+    else 
+    {
+      convertedValue += String.fromCharCode(intVal);
+      client.subscribe('payload', { qos: 0 }, function (err) {
+        if (!err) 
+        {
+          client.publish('payload', convertedValue)
+        }
+      })
+  }
+}
 
 // Handles incoming messages
 client.on('message', (topic, message, packet) => {
@@ -140,4 +162,5 @@ client.on('message', (topic, message, packet) => {
     "ventilator": ventilatorStatus,
     "door": doorStatus
   }
+})
 })
