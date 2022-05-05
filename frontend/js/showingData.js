@@ -3,6 +3,7 @@ var port = "9001";
 var usessl = false;
 var message, client;
 var connected = false;
+var widgetRepository = {};
 
 
 var id = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -20,25 +21,35 @@ function fillingProgressBar() {
         elem.style.width = width + '%'
       }
     }
-  }
-  client = new Paho.MQTT.Client(ip, Number(port), id);
+}
 
-  client.connect({
+client.connect({
+    client = new Paho.MQTT.Client(ip, Number(port), id);
     useSSL: usessl,
     onSuccess: onConnect,
     reconnect: true
-  });
-  
-  // see if mqtt is connected
-  function onConnect() {
-    console.log("connected");
-  }
+});
 
+// see if mqtt is connected
+function onConnect() {
+console.log("connected");
+}
 
-  client.subscribe('message', (topic, message) => {
+function onMessageArrived(message) {
 
-    console.log(topic);
-    const buffer = message;
+        console.log("Recieved Message from server");
+        var value = message.payloadString;
+        var datastream = message.destinationName;
+        console.log("datastream: " + datastream + ", value: " + value);
+}
+
+Object.keys(widgetRepository).forEach(function(datastream,index) {
+    client.subscribe(datastream, {
+        qos: 0
+    });
+});
+
+    const buffer = datastream;
 
     let tempInside = '';
     let convertedTempInside = '';
@@ -125,7 +136,6 @@ function fillingProgressBar() {
       })
       const container = document.querySelector('.grid-container')
       container.innerHTML = html
-  })
         
 
 

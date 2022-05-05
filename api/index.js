@@ -135,7 +135,8 @@ client.on('message', (topic, message, packet) => {
         convertedTempOutside = HexToFloat32(tempOutside).toFixed(3);
       }
     }
-  console.log(convertedTempOutside)
+  console.log(convertedTempOutside);
+  document.body.innerHTML(convertedTempInside);
 
       payload = {
       inside: convertedTempInside,
@@ -144,5 +145,5 @@ client.on('message', (topic, message, packet) => {
       ventilator: ventilatorStatus,
       door: doorStatus
     }
-    
+
 })
