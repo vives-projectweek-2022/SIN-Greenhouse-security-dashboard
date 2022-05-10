@@ -9,26 +9,26 @@
 // // var id = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
 
-function fillingProgressBar() {
-    var elem = document.getElementById('progress-bar')
-    var width = 1
-    var id = setInterval(frame, 10)
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id)
-      } else {
-        width++
-        elem.style.width = width + '%'
-      }
-    }
-}
+// function fillingProgressBar() {
+//     var elem = document.getElementById('progress-bar')
+//     var width = 1
+//     var id = setInterval(frame, 10)
+//     function frame() {
+//       if (width >= 100) {
+//         clearInterval(id)
+//       } else {
+//         width++
+//         elem.style.width = width + '%'
+//       }
+//     }
+// }
 
-client.connect({
-    client = new Paho.MQTT.Client(ip, Number(port), id);
-    useSSL: usessl,
-    onSuccess: onConnect,
-    reconnect: true
-});
+// client.connect({
+//     client = new Paho.MQTT.Client(ip, Number(port), id);
+//     useSSL: usessl,
+//     onSuccess: onConnect,
+//     reconnect: true
+// });
 // // function fillingProgressBar() {
 // //     var elem = document.getElementById('progress-bar')
 // //     var width = 1
@@ -56,25 +56,25 @@ client.connect({
 // //   }
 
 // see if mqtt is connected
-function onConnect() {
-console.log("connected");
-}
+// function onConnect() {
+// console.log("connected");
+// }
 
-function onMessageArrived(message) {
+// function onMessageArrived(message) {
 
-        console.log("Recieved Message from server");
-        var value = message.payloadString;
-        var datastream = message.destinationName;
-        console.log("datastream: " + datastream + ", value: " + value);
-}
+//         console.log("Recieved Message from server");
+//         var value = message.payloadString;
+//         var datastream = message.destinationName;
+//         console.log("datastream: " + datastream + ", value: " + value);
+// }
 
-Object.keys(widgetRepository).forEach(function(datastream,index) {
-    client.subscribe(datastream, {
-        qos: 0
-    });
-});
+// Object.keys(widgetRepository).forEach(function(datastream,index) {
+//     client.subscribe(datastream, {
+//         qos: 0
+//     });
+// });
 
-    const buffer = datastream;
+//     const buffer = datastream;
 // //   client.subscribe('message', (topic, message) => {
 
 // //     console.log(topic);
@@ -192,12 +192,25 @@ Object.keys(widgetRepository).forEach(function(datastream,index) {
 // //     return xmlHttp.responseText;
 // // }
 
-fetch('http://localhost:4000/Post/json', {
-    username: authData.username,
-    password: authData.password
-  }, {
-    mode: 'no-cors',
-    method: 'post',
-    url: `http://localhost:4000`,
-    credentials: 'include'
-  })
+// fetch('http://localhost:4000/Post/json')
+//   .then(response => response.json())
+//   .then(data => console.log(data));
+
+// const express = require('express');
+// const Joi = require('joi');
+// const app = express();
+
+// app.use(express.json());
+
+// app.get('/', (req,res) => {
+//   res.send("hello world")
+// })
+
+
+
+// let url = 'http://localhost:4000/Post/json';
+
+// fetch(url , { mode: 'no-cors'})
+// .then(res => res.json())
+// .then(payload =>
+//   console.log('Checkout this JSON! ', payload))

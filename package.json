@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard/issues"
   },
-  "homepage": "https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard#readme"
+  "homepage": "https://github.com/vives-projectweek-2022/SIN-Greenhouse-security-dashboard#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

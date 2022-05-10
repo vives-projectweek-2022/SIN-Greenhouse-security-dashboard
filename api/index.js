@@ -1,52 +1,56 @@
 // MQTT client
 const express = require('express');
-const mqtt = require('mqtt')
-const host = 'mqtt://172.16.240.99:1883' // Change ip address into the one of the mqtt broker
+// import express from 'express';
 const app = express();
+const cors = require('cors');
+// import cors from 'cors';
+const mqtt = require('mqtt')
+// import mqtt from 'mqtt';
+const host = 'mqtt://172.16.240.99:1883'; // Change ip address into the one of the mqtt broker
 const options = {
   clean: true,
   connectTimeout: 4000
 }
 let payload = {};
 
-
-
-
+app.use(express.json());
+app.use(cors());
+app.use(mqtt());
 
 // Establishes connection to MQTT broker
 const client = mqtt.connect(host, options)
 
-convertedValue = '';
+// convertedValue = '';
 
-// Handles connection and subscribes to wished topics
-client.on('connect', () => {
-  console.log('Connected')
-  client.subscribe('payload', { qos: 0 }, function (err) {
-    if (!err) {
-      console.log("Subscription successful")
-    }
-  })
+// // Handles connection and subscribes to wished topics
+// client.on('connect', () => {
+//   console.log('Connected')
+//   client.subscribe('payload', { qos: 0 }, function (err) {
+//     if (!err) {
+//       console.log("Subscription successful")
+//     }
+//   })
 
-  var payload =  '0x00,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
-  var inputArray = payload.split(",");
-  for(var i=0;i<inputArray.length;i++) {
-    var intVal = parseInt(inputArray[i],parseInt(16));
-    if(Number.isNaN(intVal)) {
-        CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
-        return;
-    }
-    else 
-    {
-      convertedValue += String.fromCharCode(intVal);
-      client.subscribe('payload', { qos: 0 }, function (err) {
-        if (!err) 
-        {
-          client.publish('payload', convertedValue)
-        }
-      })
-    }
-  }
-})
+//   var payload =  '0x00,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
+//   var inputArray = payload.split(",");
+//   for(var i=0;i<inputArray.length;i++) {
+//     var intVal = parseInt(inputArray[i],parseInt(16));
+//     if(Number.isNaN(intVal)) {
+//         CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
+//         return;
+//     }
+//     else 
+//     {
+//       convertedValue += String.fromCharCode(intVal);
+//       client.subscribe('payload', { qos: 0 }, function (err) {
+//         if (!err) 
+//         {
+//           client.publish('payload', convertedValue)
+//         }
+//       })
+//     }
+//   }
+// })
 
 
 // Handles failed connection
@@ -159,13 +163,14 @@ client.on('message', (topic, message, packet) => {
 })
 
 
-
-
-
-
 app.post('/Post/json', function requestHandler(req, res) {
   res.status(200).send(payload)
 });
 
 app.listen(4000);
 console.log('App Server running at port 4000');
+
+
+app.get('/', (req,res) => {
+  res.send("hello world")
+})

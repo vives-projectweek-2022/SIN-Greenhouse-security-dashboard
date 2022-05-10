@@ -1,7 +1,7 @@
 var ip = "172.16.240.99";
 var port = "9001";
 var usessl = false;
-var message, client;
+var message, test;
 var connected = false;
 
 var id = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -26,9 +26,9 @@ function fillingProgressBar () {
 
 btn1.addEventListener('click', hackMQTTBroker, true); // i am not IE friendly
 
-client = new Paho.MQTT.Client(ip, Number(port), id);
+test = new Paho.MQTT.Client(ip, Number(port), id);
 
-client.connect({
+test.connect({
   useSSL: usessl,
   onSuccess: onConnect,
   reconnect: true
@@ -62,5 +62,5 @@ function hackMQTTBroker() {
   console.log(convertedValue + ' was clicked'); 
   var message = new Paho.MQTT.Message(convertedValue);
   message.destinationName = "payload";
-  client.send(message);			
+  test.send(message);			
 }
