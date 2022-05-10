@@ -13,9 +13,9 @@ const options = {
 }
 let payload = {};
 
-app.use(express.json());
-app.use(cors());
-app.use(mqtt());
+// app.use(express.json());
+// app.use(cors());
+// app.use(mqtt());
 
 // Establishes connection to MQTT broker
 const client = mqtt.connect(host, options)
