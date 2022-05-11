@@ -11,7 +11,7 @@ const options = {
   clean: true,
   connectTimeout: 4000
 }
-let payload = {};
+let payload = '';
 
 // app.use(express.json());
 app.use(cors());
@@ -150,17 +150,28 @@ client.on('message', (topic, message, packet) => {
   console.log(convertedTempOutside);
   document.body.innerHTML(convertedTempInside);
 
-    payload = {
-      inside: convertedTempInside,
-      outside: convertedTempOutside,
-      heater: heaterStatus,
-      ventilator: ventilatorStatus,
-      door: doorStatus
-    };
+ payload = 
+    [{
+  "inside": convertedTempInside,
+  "outside": convertedTempOutside,
+  "heater": heaterStatus,
+  "ventilator": ventilatorStatus,
+  "door": doorStatus
+    }];
+  
+  
 
+  // payload = '{ "payload" : [' +
+  // '{ "inside":'+ concertedTempInside + ' },' +
+  // '{ "firstName":' + convertedTempOutside + ' },' +
+  // '{ "firstName":' + heaterStatus + ' },' +
+  // '{ "firstName":' + ventilatorStatus + ' },' +
+  // '{ "firstName":' + doorStatus + ' },' +']}';
      
     
 })
+
+// var test = JSON.parse(payload);
 
 
 app.post('http://localhost:4000/Post/json', function requestHandler(req, res) {
@@ -173,7 +184,6 @@ console.log('App Server running at port 4000');
 
 app.get('/Post/json', (req,res) => {
   res.send(payload)
-  console.log(payload)
 })
 
 

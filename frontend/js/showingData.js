@@ -214,54 +214,72 @@
 // .then(payload =>
 //   console.log('Checkout this JSON! ', payload))
 
-function getCurrencyPrice() {
+function showData() {
     fetch("http://localhost:4000/Post/json")
     
-    .then(responds => responds.json())
+    .then(responds => responds.text())
     .then(data => {
-        console.log(data)
-        // forEach((data) => {
-        //     console.log(payload )
-        // });
-    });
-  
-    let rate = [];
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function (){
-    if(this.readyState === 4) {
-        if(this.status === 404) {
-        console.log("error 404");
+        test = JSON.parse(data)
+        console.log(test)
+
+        //status door
+        if (test.door == false) {
             const listElement = document.createElement("li");
-            listElement.innerHTML = selectedCurrency + " not found";
+            listElement.innerHTML = "The door is closed.";
+            document.getElementById("price").appendChild(listElement);
+
+        }
+        if (test.door === true) {
+            const listElement = document.createElement("li");
+            listElement.innerHTML = "The is the door is open.";
             document.getElementById("price").appendChild(listElement);
         }
-        else if (this.status === 200) {
-        let answerJSON = this.responseText;
-        let answer = JSON.parse(answerJSON);
-  
-        // answer.forEach((element) => {
-        //     rate.push(element);
-        //     console.log(answer)
-        const data = response.json();
-        data.forEach(obj => {
-            Object.entries(obj).forEach(([key, value]) => {
-                const listElement = document.createElement("li");
-                listElement.innerHTML = "The value is:  " + key + value;
-                document.getElementById("price").appendChild(listElement);
-                
-            });
-            console.log('-------------------');
-        });
-            
-        // });
+
+        // status heater
+        if (test.heater == false) {
+            const listElement = document.createElement("li");
+            listElement.innerHTML = "The heater is turned off.";
+            document.getElementById("price").appendChild(listElement);
+
         }
-    }
-    }
-    xhttp.open("GET", "http://localhost:4000/Post/json", true);
-    xhttp.send();
-  }
+        if (test.heater === true) {
+            const listElement = document.createElement("li");
+            listElement.innerHTML = "The is heater is turned on.";
+            document.getElementById("price").appendChild(listElement);
+        }
+        // status ventilator
+        if (test.ventilator == false) {
+            const listElement = document.createElement("li");
+            listElement.innerHTML = "The ventilator is turned off.";
+            document.getElementById("price").appendChild(listElement);
+
+        }
+        if (test.ventilator === true) {
+            const listElement = document.createElement("li");
+            listElement.innerHTML = "The is ventilator is turned on.";
+            document.getElementById("price").appendChild(listElement);
+        }
+
+
+        const insideTempList = document.createElement("li");
+        insideTempList.innerHTML = "The inside temperature of the serre is: " + test.inside;
+        document.getElementById("price").appendChild(insideTempList);
+
+        const outsideTempList = document.createElement("li");
+        outsideTempList.innerHTML = "The outside temperature of the serre is: " + test.outside;
+        document.getElementById("price").appendChild(outsideTempList);
+                
+       
+    });
+  
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:4000/Post/json", true);
+            xhttp.send();
+}
+    
+  
 
   
-  document.addEventListener("DOMContentLoaded", function() {
-    getCurrencyPrice();
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    showData();
+});
