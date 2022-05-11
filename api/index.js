@@ -14,7 +14,7 @@ const options = {
 let payload = {};
 
 // app.use(express.json());
-// app.use(cors());
+app.use(cors());
 // app.use(mqtt());
 
 // Establishes connection to MQTT broker
@@ -163,7 +163,7 @@ client.on('message', (topic, message, packet) => {
 })
 
 
-app.post('/Post/json', function requestHandler(req, res) {
+app.post('http://localhost:4000/Post/json', function requestHandler(req, res) {
   res.status(200).send(payload)
 });
 
@@ -171,6 +171,9 @@ app.listen(4000);
 console.log('App Server running at port 4000');
 
 
-app.get('/', (req,res) => {
-  res.send("hello world")
+app.get('/Post/json', (req,res) => {
+  res.send(payload)
+  console.log(payload)
 })
+
+

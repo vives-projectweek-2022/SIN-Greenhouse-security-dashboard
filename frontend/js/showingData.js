@@ -4,6 +4,8 @@
 // var message, client;
 // var connected = false;
 
+// const { get } = require("express/lib/response");
+
 
 
 // // var id = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -179,9 +181,6 @@
 //     // message.destinationName = "payload";
 //     // client.send(message);			
 
-//   document.addEventListener("DOMContentLoaded", function() {
-//     showData();
-//   });
 
 
 // // function httpGet(theUrl)
@@ -197,15 +196,15 @@
 //   .then(data => console.log(data));
 
 // const express = require('express');
-// const Joi = require('joi');
 // const app = express();
 
 // app.use(express.json());
 
-// app.get('/', (req,res) => {
-//   res.send("hello world")
-// })
 
+
+// app.get('/Post/json', (req,res) => {
+//     res.send(payload)
+// })
 
 
 // let url = 'http://localhost:4000/Post/json';
@@ -214,3 +213,55 @@
 // .then(res => res.json())
 // .then(payload =>
 //   console.log('Checkout this JSON! ', payload))
+
+function getCurrencyPrice() {
+    fetch("http://localhost:4000/Post/json")
+    
+    .then(responds => responds.json())
+    .then(data => {
+        console.log(data)
+        // forEach((data) => {
+        //     console.log(payload )
+        // });
+    });
+  
+    let rate = [];
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function (){
+    if(this.readyState === 4) {
+        if(this.status === 404) {
+        console.log("error 404");
+            const listElement = document.createElement("li");
+            listElement.innerHTML = selectedCurrency + " not found";
+            document.getElementById("price").appendChild(listElement);
+        }
+        else if (this.status === 200) {
+        let answerJSON = this.responseText;
+        let answer = JSON.parse(answerJSON);
+  
+        // answer.forEach((element) => {
+        //     rate.push(element);
+        //     console.log(answer)
+        const data = response.json();
+        data.forEach(obj => {
+            Object.entries(obj).forEach(([key, value]) => {
+                const listElement = document.createElement("li");
+                listElement.innerHTML = "The value is:  " + key + value;
+                document.getElementById("price").appendChild(listElement);
+                
+            });
+            console.log('-------------------');
+        });
+            
+        // });
+        }
+    }
+    }
+    xhttp.open("GET", "http://localhost:4000/Post/json", true);
+    xhttp.send();
+  }
+
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    getCurrencyPrice();
+  });
