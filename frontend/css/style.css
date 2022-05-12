@@ -34,8 +34,8 @@ header i {
 .grid-container {
   margin: 10px;
   display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
+  grid-template-columns: auto auto;
+  gap: 25px 50px;
 }
 
 .grid-item {
@@ -51,6 +51,9 @@ header i {
   margin: auto;
   display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
 }
 
 #hack-button {
@@ -59,6 +62,7 @@ header i {
   background-color: var(--secondary-color);
   font-weight: bolder;
   border-radius: 50%;
+  margin: 10px;
 }
 
 #progress-bar {

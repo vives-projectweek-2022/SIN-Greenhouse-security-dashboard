@@ -1,18 +1,12 @@
 # Network Server
 
-## Starting server
+## How it came to be
 
-To start the server enter the command `$env:DEBUG='network-server:*'; npm start`.
+First we've created a website with html, js and css which we would use as our frontend. Subsequently we've created an API which stood in for the transportation of our payload. For this we needed to execute the following two commands in the terminal: `npm init` and `npm install express ...`.
+
+## Starting the project
+
+To start the API enter the command `npm start` in its respective folder.
 More information at [Express Getting Started](https://expressjs.com/en/starter/installing.html)
 
-Then to start the mqtt client enter the command `node ../SIN-Greenhouse-security-dashboard/public/javascripts/mqtt-client.js`.
-
-## Making changes
-
-The best way to interact with this project is to open all folders except node_modules.
-
-To create a new page to request information from, you need to create a new JavaScript file in the folder routes. Then add the necessary links in app.js.
-
-## Working with jade
-
-[Jade Syntax Docs](https://naltatis.github.io/jade-syntax-docs/)
+Then you can also start the frontend in its respective folder as you would start any other website you've created.
