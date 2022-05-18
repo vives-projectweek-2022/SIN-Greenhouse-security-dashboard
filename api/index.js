@@ -13,45 +13,12 @@ const options = {
 }
 let payload = '';
 
-// app.use(express.json());
+app.use(express.json());
 app.use(cors());
 // app.use(mqtt());
 
 // Establishes connection to MQTT broker
 const client = mqtt.connect(host, options)
-
-// convertedValue = '';
-
-// // Handles connection and subscribes to wished topics
-// client.on('connect', () => {
-//   console.log('Connected')
-//   client.subscribe('payload', { qos: 0 }, function (err) {
-//     if (!err) {
-//       console.log("Subscription successful")
-//     }
-//   })
-
-//   var payload =  '0x00,0x00,0x00,0x42,0x78,0x00,0x00,0x42,0x7f,0x00,0x00';
-//   var inputArray = payload.split(",");
-//   for(var i=0;i<inputArray.length;i++) {
-//     var intVal = parseInt(inputArray[i],parseInt(16));
-//     if(Number.isNaN(intVal)) {
-//         CommonActions.showMessageToUser({message:'Invalid payload. Payload data should match Payload Type.'});
-//         return;
-//     }
-//     else 
-//     {
-//       convertedValue += String.fromCharCode(intVal);
-//       client.subscribe('payload', { qos: 0 }, function (err) {
-//         if (!err) 
-//         {
-//           client.publish('payload', convertedValue)
-//         }
-//       })
-//     }
-//   }
-// })
-
 
 // Handles failed connection
 client.on('error', (error) => {
@@ -78,10 +45,23 @@ const HexToFloat32 = (str) => {
 }
 
 // Global variable for the received MQTT data
+
+
+
+
+// Global variable for the received MQTT data
+let tempInside = '';
+let convertedTempInside = '';
+let tempOutside = '';
+let convertedTempOutside ='';
+let heaterStatus = false;
+let ventilatorStatus = false;
+let doorStatus = false;
+
 payload = {
-  inside: '',
-  outside: '',
-  heater: false,
+  inside: 21.12,
+  outside: 19.72,
+  heater: true,
   ventilator: false,
   door: false
 }
@@ -93,13 +73,6 @@ client.on('message', (topic, message, packet) => {
 
   const buffer = message;
 
-  let tempInside = '';
-  let convertedTempInside = '';
-  let tempOutside = '';
-  let convertedTempOutside ='';
-  let heaterStatus = false;
-  let ventilatorStatus = false;
-  let doorStatus = false;
 
   // Prints the variable heaterStatus to the terminal
   console.log('Heater status: ')
@@ -150,16 +123,14 @@ client.on('message', (topic, message, packet) => {
   console.log(convertedTempOutside);
   document.body.innerHTML(convertedTempInside);
 
- payload = 
-    [{
-  "inside": convertedTempInside,
-  "outside": convertedTempOutside,
-  "heater": heaterStatus,
-  "ventilator": ventilatorStatus,
-  "door": doorStatus
-    }];
-  
-  
+//  var payload = 
+//     [{
+//   "inside": convertedTempInside,
+//   "outside": convertedTempOutside,
+//   "heater": heaterStatus,
+//   "ventilator": ventilatorStatus,
+//   "door": doorStatus
+//     }];  
 
   // payload = '{ "payload" : [' +
   // '{ "inside":'+ concertedTempInside + ' },' +
@@ -173,17 +144,22 @@ client.on('message', (topic, message, packet) => {
 
 // var test = JSON.parse(payload);
 
-
-app.post('http://localhost:4000/Post/json', function requestHandler(req, res) {
-  res.status(200).send(payload)
-});
-
 app.listen(4000);
 console.log('App Server running at port 4000');
-
+console.log(payload)
 
 app.get('/Post/json', (req,res) => {
   res.send(payload)
 })
+
+
+
+for ( let i = 0; i < 10; i++) {
+  app.post('/Post/json', function requestHandler(req, res) {
+    res.status(200).send(payload)
+  });  
+
+}
+
 
 
