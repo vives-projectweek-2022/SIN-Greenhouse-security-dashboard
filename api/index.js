@@ -44,10 +44,6 @@ const HexToFloat32 = (str) => {
   } else return 0
 }
 
-// Global variable for the received MQTT data
-
-
-
 
 // Global variable for the received MQTT data
 let tempInside = '';

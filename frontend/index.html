@@ -17,9 +17,7 @@
   <div class="grid-container" id="messages">
 
     <!-- display door status -->
-    <div id="door" class="grid-item">
-      
-    </div>
+    <div id="door" class="grid-item"></div>
 
     <!-- display heater status -->
     <div id="heater" class="grid-item">
@@ -40,20 +38,14 @@
     
     </div>
   </div>
-  <div class="row" class="content" >
-    <ul class="col" id="list"></ul>
-
-    
-    <!-- <ul class="col" id="price"></ul> -->
-  </div>
-
+ 
   <div class="hack">
     <button id="hack-button" onclick="fillingProgressBar();">Hack</button>
     <div id="empty-bar">
       <div id="progress-bar"></div>
     </div>
   </div>
-  
+
   <script src="./js/paho-mqtt-min.js"></script>
   <!-- <script src="../api/index.js"></script> -->
   <script src="./js/showingData.js"></script>
